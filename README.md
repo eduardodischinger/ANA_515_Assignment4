@@ -1,1 +1,72 @@
 # ANA_515_Assignment4
+Assingment using https://data-flair.training/blogs/machine-learning-datasets/ and selecting the project 
+https://www.kaggle.com/datasets/shwetabh123/mall-customers?select=Mall_Customers.csv
+
+Code used:
+
+---
+title: "ANA_515_ASSIGNMENT4"
+author: "Eduardo Dischinger"
+date: '2022-10-13'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r, include = TRUE}
+#1
+#The Mall customers dataset contains information about people visiting the mall. The dataset has the following variables: gender, customer id, age, annual income, and spending score. 
+#The business goal would be to segment customers based on their demographics. The segmentation is a strategy to divide customers in groups and use it to better target marketing/ sales campaigns
+```
+
+```{r, include = TRUE}
+#2
+#The dataset was retrieved from https://www.kaggle.com/datasets/shwetabh123/mall-customers?select=Mall_Customers.csv 
+#I downloaded the CSV file and saved it on my documents file
+```
+
+```{r, include = TRUE}
+#3
+data1 <- read.csv("/Users/eduardodischinger/documents/Mcdaniel/Mall_Customers (2).csv")
+```
+
+```{r, include = TRUE}
+#4
+#The only categorical variable is "Gender". The rest is numerical
+nrow(data1)
+#200 rows
+ncol(data1)
+#5 columns
+str(data1)
+#variable names: "Customer ID"; "Genre"; "Age"; "Annual Income"; "Spending Score"
+summary(data1)
+#Age: Mean = 38.85y; Min = 18; Max = 70
+#Annual Income (in thousands): Mean = 60.56; Min 15.00; Max = 137.00
+#Spending Score (in hundreds)" Mean = 50.20; Min 1.00; Max = 99.00
+```
+
+```{r, include = TRUE}
+#5
+#For data preparation, there was a decimal adjustment for "Annual Income", as it was adjusted/rounded for thousands rather than the annual income whole number. It made easier to read and work with the dataset.
+#I also would divide the dataset in dummy variables for gender
+```
+
+```{r, include = TRUE}
+#6 and #7
+#We can divide our dataset by gender, age, annual income, spending score; so the shopping mall management can better target their marketing/sales campaigns
+#I will create two new variables, where I split the customers by gender
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+data1 %>% mutate(dummy=1) %>%
+spread(key=Genre,value=dummy, fill=0) 
+#With the new dummy variables created, the management team could, for example, filter population by genre and annual income or spending score. That way would be easier in order to segment customers.
+```
+
+```{r, include = TRUE}
+#8
+#This dataset could be used for many objectives, such as segmentation or regression analysis in order to find spending patterns, among others.
+#The goal of the management, assuming they were doing this project, would be to segment the customer base. I would pick a few visualizations that would be practical, such as:
+#1- Median Annual Income for Female and Male and descriptive statistics in regards to their age (this would help to better understand the customer base)
+#2-Regression Analysis for the relationship between Annual Income and Spending Score (this would be important to visualize the relationship here and get a broader perspective about the customer base)
+```
